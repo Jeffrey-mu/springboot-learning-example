@@ -43,6 +43,8 @@ public interface BookService {
      */
     Book findById(Long id);
 
+    Book[] findByIds(String id);
+
     /**
      * 查找书是否存在
      * @param book
@@ -56,4 +58,5 @@ public interface BookService {
      * @return
      */
     Book findByName(String name);
+
 }

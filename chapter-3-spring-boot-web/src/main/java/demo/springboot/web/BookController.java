@@ -47,6 +47,15 @@ public class BookController {
         return bookService.findById(id);
     }
 
+
+    /**
+     * 获取 Book[]
+     * 处理 "/book/ids/{id}" 的 GET 请求，多个id逗号隔开
+     */
+    @RequestMapping(value = "/ids/{id}", method = RequestMethod.GET)
+    public Book[] getBooks(@PathVariable String ids) {
+        return bookService.findByIds(ids);
+    }
     /**
      * 创建 Book
      * 处理 "/book/create" 的 POST 请求，用来新建 Book 信息

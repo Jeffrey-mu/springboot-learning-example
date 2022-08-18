@@ -2,16 +2,9 @@ package demo.springboot.service.impl;
 
 import demo.springboot.domain.Book;
 import demo.springboot.service.BookService;
-import demo.springboot.web.BookController;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 
-import javax.annotation.PostConstruct;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -59,12 +52,19 @@ public class BookServiceImpl implements BookService {
     public Book delete(Long id) {
         return BOOK_DB.remove(id.toString());
     }
-
     @Override
     public Book findById(Long id) {
         return BOOK_DB.get(id.toString());
     }
-
+    @Override
+    public Book[] findByIds(String id) {
+        String[] iv = id.split(",");
+        Book[] books = new Book[iv.length];
+        for(int i = 0; i < iv.length; i++) {
+            books[i] = BOOK_DB.get(iv[i].toString());
+        }
+        return books;
+    }
     @Override
     public boolean exists(Book book) {
         return findByName(book.getName()) != null;
@@ -81,4 +81,5 @@ public class BookServiceImpl implements BookService {
 
         return null;
     }
+
 }
